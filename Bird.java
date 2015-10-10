@@ -5,8 +5,6 @@ import javax.imageio.*;
 import java.util.*;
 import javax.sound.sampled.*;
 
-//detailed comment code for classes implementing Shootable interface can be found in Creeper class
-
 public class Bird implements Shootable {
     
     private Rectangle bodyBox;
@@ -16,7 +14,6 @@ public class Bird implements Shootable {
     Point movePoint;
     private static Rectangle LIMIT_BOX = new Rectangle(0, 0, 950, 180);
     
-    //constructor
     public Bird() {
         respawn();
         try {
@@ -26,12 +23,10 @@ public class Bird implements Shootable {
         movePoint = new Point(gen.nextInt(3), gen.nextInt(3));
     }
     
-    //draws an image of the object
-    public void draw(Graphics2D drawer) {        
+    public void draw(Graphics2D drawer) {
         drawer.drawImage(picture, (int)bodyBox.getX(), (int)bodyBox.getY(), null);    
     }
     
-    //calculates the next move position of the object inside limit boxes, according to direction
     public void move() {
         if(moveCounter==0) {
             Random gen = new Random();
@@ -51,31 +46,26 @@ public class Bird implements Shootable {
         moveCounter--;
     }
     
-    //checks if point is contained in hitBox
     public boolean contains(Point x) {
         return bodyBox.contains(x);
     }
     
-    //subtracts one from health
     public void hit() {
         health--;
         if(health<0) health = 0;       
     }
     
-    //respawns creature
     public void respawn() {
         Random gen = new Random();
         bodyBox = new Rectangle(gen.nextInt((int)LIMIT_BOX.getWidth()), gen.nextInt((int)LIMIT_BOX.getHeight()), 120, 74);
         health = 200;
     }
     
-    //true if creature still alive
     public boolean isAlive() {
         if(health==0) return false;
         return true;
     }
     
-    //plays the dying sound
     public void die() {
         try {
             Clip dieSound = AudioSystem.getClip();
