@@ -8,9 +8,9 @@ import java.io.*;
 public class Engine { //class declaration for the main class to run the program
     
     public static void main(String[] args) { //main method declaration, runs the program
-        JOptionPane.showMessageDialog(null, "Mouse around with your mouse to aim, click and hold to shoot, and gather the most points possible!\np.s. sometimes the program freezes and just displays white so just restart it!"); //call static method on JOptionPane class to display message to user
+        //JOptionPane.showMessageDialog(null, "Mouse around with your mouse to aim, click and hold to shoot, and gather the most points possible!\np.s. sometimes the program freezes and just displays white so just restart it!"); //call static method on JOptionPane class to display message to user
         
-        JFrame display = new JFrame("My FPS Game."); //declare new JFrame reference display and initialize with new instance of the class, string explicit parameter for the title
+        JFrame display = new JFrame("DroneFPS"); //declare new JFrame reference display and initialize with new instance of the class, string explicit parameter for the title
         display.setSize(1000, 625); //set the size of display by calling the setSize method on the reference
         display.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE); //set its default close operation by passing in the parameter as a parameter in the method call of method setDefaultCloseOperation on the reference display
         
@@ -43,11 +43,11 @@ public class Engine { //class declaration for the main class to run the program
         display.addMouseListener(new MoveListener()); //create new instance of MoveListener class and add it to display by calling the addMouseListener method and passing it in as an explicit parameter
         viewUpdater.start(); //start the timer
         
-        try { //try catch statement to catch any exceptions thrown while playing audio clip
-            Clip backgroundSound = AudioSystem.getClip(); //get new instance of Clip from AudioSystem class
-            backgroundSound.open(AudioSystem.getAudioInputStream(new File("backgroundNoise.wav"))); //open the clip by passing in audio stream returned by caling method with explicit parameter a new file which locates the audio file
-            backgroundSound.loop(Clip.LOOP_CONTINUOUSLY); //play the audio sound in a continuous loop
-        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {}        
+        //try { //try catch statement to catch any exceptions thrown while playing audio clip
+        //    Clip backgroundSound = AudioSystem.getClip(); //get new instance of Clip from AudioSystem class
+        //    backgroundSound.open(AudioSystem.getAudioInputStream(new File("backgroundNoise.wav"))); //open the clip by passing in audio stream returned by caling method with explicit parameter a new file which locates the audio file
+        //    backgroundSound.loop(Clip.LOOP_CONTINUOUSLY); //play the audio sound in a continuous loop
+        //} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {}
     }
     
 }

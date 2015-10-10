@@ -21,7 +21,7 @@ public class Creeper implements Shootable { //class declaration for creeper that
     public Creeper() { //constructor
         respawn(); //call respawn method
         try {
-            picture = ImageIO.read(new File("creeper.png")); //set the picture to the file picture in the package
+            picture = ImageIO.read(new File("zombiesmall.png")); //set the picture to the file picture in the package
         } catch (Exception e) {}
         Random gen = new Random(); //create a random generator
         movePoint = new Point(gen.nextInt(5), gen.nextInt(5)); //randomly set the movePoint, meaning the next location of the creeper
@@ -74,11 +74,11 @@ public class Creeper implements Shootable { //class declaration for creeper that
     }
     
     public void die() { //method that plays a sound clip when the creeper dies
-        try { //try catch statement to catch any exceptions that might be thrown
-            Clip dieSound = AudioSystem.getClip(); //declare audio Clip
-            dieSound.open(AudioSystem.getAudioInputStream(new File("creeperDie.wav"))); //open the clip from the sound file
-            dieSound.start(); //play the sound clip once 
-        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {}  
+        //try { //try catch statement to catch any exceptions that might be thrown
+        //    Clip dieSound = AudioSystem.getClip(); //declare audio Clip
+        //    dieSound.open(AudioSystem.getAudioInputStream(new File("creeperDie.wav"))); //open the clip from the sound file
+        //    dieSound.start(); //play the sound clip once
+        //} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {}
     }
     
 }
