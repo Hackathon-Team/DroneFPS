@@ -8,9 +8,9 @@ import java.io.*;
 public class Engine {
     
     public static void main(String[] args) {
-        JOptionPane.showMessageDialog(null, "Mouse around with your mouse to aim, click and hold to shoot, and gather the most points possible!\np.s. sometimes the program freezes and just displays white so just restart it!");
+        //JOptionPane.showMessageDialog(null, "Mouse around with your mouse to aim, click and hold to shoot, and gather the most points possible!\np.s. sometimes the program freezes and just displays white so just restart it!");
         
-        JFrame display = new JFrame("My FPS Game.");
+        JFrame display = new JFrame("DroneFPS");
         display.setSize(1000, 625);
         display.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 

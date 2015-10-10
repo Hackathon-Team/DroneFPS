@@ -5,7 +5,7 @@ import javax.imageio.*;
 import java.util.*;
 import javax.sound.sampled.*;
 
-public class Creeper implements Shootable {
+public class Creeper {
     
     private Rectangle bodyBox;
     BufferedImage picture;
@@ -14,17 +14,17 @@ public class Creeper implements Shootable {
     Point footPoint;
     Point movePoint;
     
-    private static final Rectangle LIMIT_BOX1 = new Rectangle(212, 238, 232, 61);
-    private static final Rectangle LIMIT_BOX2 = new Rectangle(444, 238, 530, 129);
-    private static final Rectangle LIMIT_BOX3 = new Rectangle(714, 367, 260, 179);
+    //private static final Rectangle LIMIT_BOX1 = new Rectangle(212, 238, 232, 61);
+    //private static final Rectangle LIMIT_BOX2 = new Rectangle(444, 238, 530, 129);
+    //private static final Rectangle LIMIT_BOX3 = new Rectangle(714, 367, 260, 179);
     
     public Creeper() {
-        respawn();
         try {
-            picture = ImageIO.read(new File("creeper.png"));
+            picture = new ImgUtils().scaleImage(50,87,"zombie.png");
         } catch (Exception e) {}
+        respawn();
         Random gen = new Random();
-        movePoint = new Point(gen.nextInt(5), gen.nextInt(5));
+        movePoint = new Point(0, -1);
     }
     
     public void draw(Graphics2D drawer) {
@@ -32,23 +32,19 @@ public class Creeper implements Shootable {
     }
     
     public void move() {
-        if(moveCounter==0) {
             Random gen = new Random();
+            int y = -1;
             int x = gen.nextInt(3);
-            int y = gen.nextInt(3);
             if(gen.nextInt()%2==0) x = -x;
-            if(gen.nextInt()%2==0) y = -y;
             movePoint = new Point(x, y);
-            moveCounter = 40;
-        }
         
         Point nextPoint = new Point((int)(footPoint.getX()+movePoint.getX()), (int)(footPoint.getY()+movePoint.getY()));
-        if(!LIMIT_BOX1.contains(nextPoint)&&!LIMIT_BOX2.contains(nextPoint)&&!LIMIT_BOX3.contains(nextPoint)) {
+        //if(!LIMIT_BOX1.contains(nextPoint)&&!LIMIT_BOX2.contains(nextPoint)&&!LIMIT_BOX3.contains(nextPoint)) {
             movePoint = new Point((int)-movePoint.getX(), (int)-movePoint.getY());
             nextPoint = new Point((int)(footPoint.getX()+movePoint.getX()), (int)(footPoint.getY()+movePoint.getY()));
-        }
+        //}
         footPoint = nextPoint;
-        bodyBox = new Rectangle((int)(footPoint.getX()-60), (int)(footPoint.getY()-116), 60, 116);
+        bodyBox = new Rectangle((int)(footPoint.getX()-picture.getWidth()), (int)(footPoint.getY()-picture.getHeight()), picture.getWidth(), picture.getHeight());
         moveCounter--;
     }
     
@@ -63,8 +59,8 @@ public class Creeper implements Shootable {
     
     public void respawn() {
         Random gen = new Random();
-        footPoint = new Point((int)(gen.nextInt((int)LIMIT_BOX2.getWidth())+LIMIT_BOX2.getX()), (int)(gen.nextInt((int)LIMIT_BOX2.getHeight())+LIMIT_BOX2.getY()));
-        bodyBox = new Rectangle((int)(footPoint.getX()-60), (int)(footPoint.getY()-116), 60, 116);
+        footPoint = new Point(50+gen.nextInt(900), 87);
+        bodyBox = new Rectangle((int)(footPoint.getX()-picture.getWidth()), (int)(footPoint.getY()-picture.getHeight()), picture.getWidth(), picture.getHeight());
         health = 200;
     }
     
@@ -73,12 +69,12 @@ public class Creeper implements Shootable {
         return true;
     }
 
-//    public void die() {
-//        try {
-//            Clip dieSound = AudioSystem.getClip();
-//            dieSound.open(AudioSystem.getAudioInputStream(new File("creeperDie.wav")));
-//            dieSound.start();
-//        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {}
-//    }
+    public void die() {
+        try {
+            Clip dieSound = AudioSystem.getClip();
+            dieSound.open(AudioSystem.getAudioInputStream(new File("creeperDie.wav")));
+            dieSound.start();
+        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {}
+    }
     
 }

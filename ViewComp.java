@@ -10,8 +10,8 @@ public class ViewComp extends JComponent {
     Clip gunSound;
     private Point mousePoint;
     private CrossHairView crossHairs;
-    private Shootable[] enemies;
-    private int[] enemyCounter = new int[6];
+    private Creeper[] enemies;
+    private int[] enemyCounter = new int[3];
     private boolean pressed;
     private int points;
     
@@ -21,8 +21,8 @@ public class ViewComp extends JComponent {
             gunSound.open(AudioSystem.getAudioInputStream(new File("gunfire.wav")));
         } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {}        
         mousePoint = new Point(0, 0);
-        for(int x=0; x<6; x++) enemyCounter[x] = 200;
-        enemies = new Shootable[6];
+        for(int x=0; x<3; x++) enemyCounter[x] = 200;
+        enemies = new Creeper[6];
         enemies[0] = new Creeper();
         enemies[1] = new Creeper();
         enemies[2] = new Creeper();
@@ -43,7 +43,7 @@ public class ViewComp extends JComponent {
     public void setViewLocation(int c, int y) {
         repaint();
         mousePoint = new Point(c, y);
-        for(int x=0; x<6; x++) {
+        for(int x=0; x<3; x++) {
             if(enemies[x].contains(mousePoint)&&pressed) enemies[x].hit();
             if(enemies[x].isAlive()) enemies[x].move();
             else {
@@ -65,7 +65,7 @@ public void paintComponent(Graphics g) {
         drawer.setStroke(new BasicStroke(2));
         crossHairs.setLocation((int)mousePoint.getX(), (int)mousePoint.getY(), pressed);
         boolean aimed = false;
-        for(int x=0; x<6; x++) {
+        for(int x=0; x<3; x++) {
             if(enemyCounter[x]==200) {
                 enemies[x].draw(drawer);
                 if(enemies[x].contains(mousePoint)) aimed = true;
