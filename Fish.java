@@ -5,8 +5,6 @@ import javax.imageio.*;
 import java.util.*;
 import javax.sound.sampled.*;
 
-//detailed comment code for classes implementing Shootable interface can be found in Creeper class
-
 public class Fish implements Shootable {
     
     private Rectangle bodyBox;
@@ -18,8 +16,7 @@ public class Fish implements Shootable {
     private static final Rectangle LIMIT_BOX1 = new Rectangle(2, 269, 230, 60);
     private static final Rectangle LIMIT_BOX2 = new Rectangle(2, 329, 327, 102);
     private static final Rectangle LIMIT_BOX3 = new Rectangle(2, 431, 429, 152);
-    
-    //constructor
+
     public Fish() {
         respawn();
         try {
@@ -28,13 +25,11 @@ public class Fish implements Shootable {
         Random gen = new Random();
         movePoint = new Point(gen.nextInt(3), gen.nextInt(3));
     }
-    
-    //draws an image of the object
+
     public void draw(Graphics2D drawer) {        
         drawer.drawImage(picture, (int)bodyBox.getX(), (int)bodyBox.getY(), null);    
     }
-    
-    //calculates the next move position of the object inside limit boxes, according to direction
+
     public void move() {
         if(moveCounter==0) {
             Random gen = new Random();
@@ -55,33 +50,28 @@ public class Fish implements Shootable {
         bodyBox = new Rectangle((int)(footPoint.getX()), (int)(footPoint.getY()-85), 125, 85);
         moveCounter--;
     }
-    
-    //checks if point is contained in hitBox
+
     public boolean contains(Point x) {
         return bodyBox.contains(x);
     }
-    
-    //gets hit
+
     public void hit() {
         health--;
         if(health<0) health = 0;       
     }
-    
-    //respawns the dead object
+
     public void respawn() {
         Random gen = new Random();
         footPoint = new Point((int)(gen.nextInt((int)LIMIT_BOX2.getWidth())+LIMIT_BOX2.getX()), (int)(gen.nextInt((int)LIMIT_BOX2.getHeight())+LIMIT_BOX2.getY()));
         bodyBox = new Rectangle((int)(footPoint.getX()), (int)(footPoint.getY()-85), 125, 85);
         health = 200;
     }
-    
-    //checks whether is alive
+
     public boolean isAlive() {
         if(health==0) return false;
         return true;
     }
-    
-    //kills the object - plays death audio stream
+
     public void die() {
         try {
             Clip dieSound = AudioSystem.getClip();
