@@ -13,7 +13,7 @@ public class Engine {
         JFrame display = new JFrame("My FPS Game.");
         display.setSize(1000, 625);
         display.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-        
+
         final ViewComp picture = new ViewComp();
         display.add(picture);
         display.setVisible(true);
@@ -42,12 +42,12 @@ public class Engine {
         }
         display.addMouseListener(new MoveListener());
         viewUpdater.start();
-        
-        try {
-            Clip backgroundSound = AudioSystem.getClip();
-            backgroundSound.open(AudioSystem.getAudioInputStream(new File("backgroundNoise.wav")));
-            backgroundSound.loop(Clip.LOOP_CONTINUOUSLY);
-        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {}        
+
+//        try {
+//            Clip backgroundSound = AudioSystem.getClip();
+//            backgroundSound.open(AudioSystem.getAudioInputStream(new File("backgroundNoise.wav")));
+//            backgroundSound.loop(Clip.LOOP_CONTINUOUSLY);
+//        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {}
     }
     
 }

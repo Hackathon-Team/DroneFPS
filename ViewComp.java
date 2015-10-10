@@ -5,7 +5,7 @@ import javax.sound.sampled.*;
 import java.io.*;
 
 public class ViewComp extends JComponent {
-    
+
     private Graphics2D drawer;
     Clip gunSound;
     private Point mousePoint;
@@ -25,14 +25,11 @@ public class ViewComp extends JComponent {
         enemies = new Shootable[6];
         enemies[0] = new Creeper();
         enemies[1] = new Creeper();
-        enemies[2] = new Fish();
-        enemies[3] = new Fish();
-        enemies[4] = new Bird();
-        enemies[5] = new Bird();
+        enemies[2] = new Creeper();
         crossHairs = new CrossHairView();              
         points = 0;
     }    
-    
+
     public void firePressed() {
         pressed = true;
         gunSound.loop(Clip.LOOP_CONTINUOUSLY);
@@ -63,7 +60,7 @@ public class ViewComp extends JComponent {
         }
     }
     
-    public void paintComponent(Graphics g) {
+public void paintComponent(Graphics g) {
         drawer =(Graphics2D) g;
         drawer.setStroke(new BasicStroke(2));
         crossHairs.setLocation((int)mousePoint.getX(), (int)mousePoint.getY(), pressed);
@@ -72,7 +69,7 @@ public class ViewComp extends JComponent {
             if(enemyCounter[x]==200) {
                 enemies[x].draw(drawer);
                 if(enemies[x].contains(mousePoint)) aimed = true;
-            }        
+            }
         }
         drawer.setColor(Color.WHITE);
         drawer.setFont(new Font("Helvetica", Font.PLAIN, 20));

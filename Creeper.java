@@ -72,13 +72,13 @@ public class Creeper implements Shootable {
         if(health==0) return false;
         return true;
     }
-    
-    public void die() {
-        try {
-            Clip dieSound = AudioSystem.getClip();
-            dieSound.open(AudioSystem.getAudioInputStream(new File("creeperDie.wav")));
-            dieSound.start();
-        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {}  
-    }
+
+//    public void die() {
+//        try {
+//            Clip dieSound = AudioSystem.getClip();
+//            dieSound.open(AudioSystem.getAudioInputStream(new File("creeperDie.wav")));
+//            dieSound.start();
+//        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {}
+//    }
     
 }
