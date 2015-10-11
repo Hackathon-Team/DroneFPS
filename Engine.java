@@ -13,8 +13,8 @@ public class Engine {
         JFrame display = new JFrame("DroneFPS");
         display.setSize(1000, 625);
         display.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-        //display.setUndecorated(true);
-        //display.setOpacity(0.5f);
+        display.setUndecorated(true);
+        display.setOpacity(0.5f);
 
         final ViewComp picture = new ViewComp();
         display.add(picture);

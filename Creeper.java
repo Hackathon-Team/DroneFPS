@@ -39,7 +39,7 @@ public class Creeper {
             if(moveCounter%5==0) {
                 int newWidth = picture.getWidth() + 1;
                 int newHeight = picture.getHeight() + 2;
-                picture = new ImgUtils().scaleImage(newWidth, newHeight, "zombie.png");
+                picture = new ImgUtils().scaleImage(newWidth, newHeight, "zombiedark.png");
             }
         
         //Point nextPoint = new Point((int)(footPoint.getX()+movePoint.getX()),(int)(footPoint.getY()+movePoint.getY()));
@@ -66,12 +66,12 @@ public class Creeper {
         if(health<0) health = 0;
         x++;
         if(x%2==0) picture = new ImgUtils().scaleImage(picture.getWidth(), picture.getHeight(), "zombiefaded.png");
-        else picture = new ImgUtils().scaleImage(picture.getWidth(), picture.getHeight(), "zombie.png");
+        else picture = new ImgUtils().scaleImage(picture.getWidth(), picture.getHeight(), "zombiedark.png");
     }
     
     public void respawn() {
         try {
-            picture = new ImgUtils().scaleImage(50,87,"zombie.png");
+            picture = new ImgUtils().scaleImage(50,87,"zombiedark.png");
         } catch (Exception e) {}
         Random gen = new Random();
         footPoint = new Point(50+gen.nextInt(900), picture.getHeight());
@@ -93,7 +93,7 @@ public class Creeper {
     }
 
     public void resetOpacity(){
-        picture = new ImgUtils().scaleImage(picture.getWidth(), picture.getHeight(), "zombie.png");
+        picture = new ImgUtils().scaleImage(picture.getWidth(), picture.getHeight(), "zombiedark.png");
     }
     
 }
