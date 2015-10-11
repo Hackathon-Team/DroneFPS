@@ -22,7 +22,7 @@ public class ViewComp extends JComponent {
         } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {}        
         mousePoint = new Point(0, 0);
         for(int x=0; x<3; x++) enemyCounter[x] = 200;
-        enemies = new Creeper[6];
+        enemies = new Creeper[3];
         enemies[0] = new Creeper();
         enemies[1] = new Creeper();
         enemies[2] = new Creeper();

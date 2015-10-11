@@ -25,7 +25,7 @@ public class Engine {
         Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank cursor");
         display.getContentPane().setCursor(blankCursor);
         
-        final Timer viewUpdater = new Timer(10, new ActionListener() {
+        final Timer viewUpdater = new Timer(50, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Point mousePoint = MouseInfo.getPointerInfo().getLocation();
                 mousePoint.translate(-8, -31);

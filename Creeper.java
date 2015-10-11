@@ -4,15 +4,17 @@ import java.io.*;
 import javax.imageio.*;
 import java.util.*;
 import javax.sound.sampled.*;
+import javax.swing.*;
 
 public class Creeper {
     
     private Rectangle bodyBox;
     BufferedImage picture;
-    int health = 200;
-    int moveCounter = 40;
+    int health = 100;
     Point footPoint;
     Point movePoint;
+    int dx;
+    int moveCounter = 0;
     
     //private static final Rectangle LIMIT_BOX1 = new Rectangle(212, 238, 232, 61);
     //private static final Rectangle LIMIT_BOX2 = new Rectangle(444, 238, 530, 129);
@@ -24,7 +26,9 @@ public class Creeper {
         } catch (Exception e) {}
         respawn();
         Random gen = new Random();
-        movePoint = new Point(0, -1);
+        movePoint = new Point(0, 1);
+        dx = gen.nextInt(2);
+        if(gen.nextInt()%2==0) dx = -dx;
     }
     
     public void draw(Graphics2D drawer) {
@@ -32,20 +36,27 @@ public class Creeper {
     }
     
     public void move() {
-            Random gen = new Random();
-            int y = -1;
-            int x = gen.nextInt(3);
-            if(gen.nextInt()%2==0) x = -x;
-            movePoint = new Point(x, y);
+            int y = 1;
+            movePoint = new Point(dx, y);
+            if(moveCounter%5==0) {
+                int newWidth = picture.getWidth() + 1;
+                int newHeight = picture.getHeight() + 2;
+                picture = new ImgUtils().scaleImage(newWidth, newHeight, "zombie.png");
+            }
         
-        Point nextPoint = new Point((int)(footPoint.getX()+movePoint.getX()), (int)(footPoint.getY()+movePoint.getY()));
+        //Point nextPoint = new Point((int)(footPoint.getX()+movePoint.getX()),(int)(footPoint.getY()+movePoint.getY()));
         //if(!LIMIT_BOX1.contains(nextPoint)&&!LIMIT_BOX2.contains(nextPoint)&&!LIMIT_BOX3.contains(nextPoint)) {
-            movePoint = new Point((int)-movePoint.getX(), (int)-movePoint.getY());
-            nextPoint = new Point((int)(footPoint.getX()+movePoint.getX()), (int)(footPoint.getY()+movePoint.getY()));
+        //    movePoint = new Point((int)-movePoint.getX(), (int)-movePoint.getY());
+           Point nextPoint = new Point((int)(footPoint.getX()+movePoint.getX()), (int)(footPoint.getY()+movePoint.getY()));
         //}
-        footPoint = nextPoint;
+        if(nextPoint.getX()<1000 && nextPoint.getY()<625 && nextPoint.getX()-picture.getWidth()>0) footPoint = nextPoint;
+        else if(nextPoint.getY()<625) footPoint = new Point((int)footPoint.getX(),(int)footPoint.getY()+1);
+        else if(nextPoint.getY()>=625) {
+            JOptionPane.showMessageDialog(null,"You lose!");
+        }
         bodyBox = new Rectangle((int)(footPoint.getX()-picture.getWidth()), (int)(footPoint.getY()-picture.getHeight()), picture.getWidth(), picture.getHeight());
-        moveCounter--;
+
+        moveCounter++;
     }
     
     public boolean contains(Point x) {
@@ -59,9 +70,9 @@ public class Creeper {
     
     public void respawn() {
         Random gen = new Random();
-        footPoint = new Point(50+gen.nextInt(900), 87);
+        footPoint = new Point(50+gen.nextInt(900), picture.getHeight());
         bodyBox = new Rectangle((int)(footPoint.getX()-picture.getWidth()), (int)(footPoint.getY()-picture.getHeight()), picture.getWidth(), picture.getHeight());
-        health = 200;
+        health = 100;
     }
     
     public boolean isAlive() {
