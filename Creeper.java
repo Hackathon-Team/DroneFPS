@@ -15,6 +15,7 @@ public class Creeper {
     Point movePoint;
     int dx;
     int moveCounter = 0;
+    int x = 0;
     
     //private static final Rectangle LIMIT_BOX1 = new Rectangle(212, 238, 232, 61);
     //private static final Rectangle LIMIT_BOX2 = new Rectangle(444, 238, 530, 129);
@@ -63,6 +64,9 @@ public class Creeper {
     public void hit() {
         health--;
         if(health<0) health = 0;
+        x++;
+        if(x%2==0) picture = new ImgUtils().scaleImage(picture.getWidth(), picture.getHeight(), "zombiefaded.png");
+        else picture = new ImgUtils().scaleImage(picture.getWidth(), picture.getHeight(), "zombie.png");
     }
     
     public void respawn() {
@@ -86,6 +90,10 @@ public class Creeper {
             dieSound.open(AudioSystem.getAudioInputStream(new File("creeperDie.wav")));
             dieSound.start();
         } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {}
+    }
+
+    public void resetOpacity(){
+        picture = new ImgUtils().scaleImage(picture.getWidth(), picture.getHeight(), "zombie.png");
     }
     
 }

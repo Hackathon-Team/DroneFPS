@@ -13,13 +13,15 @@ public class Engine {
         JFrame display = new JFrame("DroneFPS");
         display.setSize(1000, 625);
         display.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+        //display.setUndecorated(true);
+        //display.setOpacity(0.5f);
 
         final ViewComp picture = new ViewComp();
         display.add(picture);
         display.setVisible(true);
-        JLabel backgroundLabel = new JLabel(new ImageIcon("background.jpg"));
-        display.add(backgroundLabel);
-        display.setVisible(true);
+        //JLabel backgroundLabel = new JLabel(new ImageIcon("background.jpg"));
+        //display.add(backgroundLabel);
+        //display.setVisible(true);
         
         BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank cursor");

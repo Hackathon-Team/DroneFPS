@@ -36,6 +36,9 @@ public class ViewComp extends JComponent {
     public void fireReleased() {
         pressed = false;
         gunSound.stop();
+        for(int x=0; x<5; x++)  {
+           enemies[x].resetOpacity();
+        }
     }
     
     public void setViewLocation(int c, int y) {
@@ -70,7 +73,7 @@ public void paintComponent(Graphics g) {
                 if(enemies[x].contains(mousePoint)) aimed = true;
           //  }
         }
-        drawer.setColor(Color.WHITE);
+        drawer.setColor(Color.BLACK);
         drawer.setFont(new Font("Helvetica", Font.PLAIN, 20));
         drawer.drawString("Points: " + points, 850, 50);
         crossHairs.draw(drawer, aimed);
