@@ -10,7 +10,7 @@ public class Creeper {
     
     private Rectangle bodyBox;
     BufferedImage picture;
-    int health = 100;
+    int health = 50;
     Point footPoint;
     Point movePoint;
     int dx;
@@ -21,13 +21,10 @@ public class Creeper {
     //private static final Rectangle LIMIT_BOX3 = new Rectangle(714, 367, 260, 179);
     
     public Creeper() {
-        try {
-            picture = new ImgUtils().scaleImage(50,87,"zombie.png");
-        } catch (Exception e) {}
         respawn();
         Random gen = new Random();
         movePoint = new Point(0, 1);
-        dx = gen.nextInt(2);
+        dx = gen.nextInt(3);
         if(gen.nextInt()%2==0) dx = -dx;
     }
     
@@ -69,10 +66,13 @@ public class Creeper {
     }
     
     public void respawn() {
+        try {
+            picture = new ImgUtils().scaleImage(50,87,"zombie.png");
+        } catch (Exception e) {}
         Random gen = new Random();
         footPoint = new Point(50+gen.nextInt(900), picture.getHeight());
         bodyBox = new Rectangle((int)(footPoint.getX()-picture.getWidth()), (int)(footPoint.getY()-picture.getHeight()), picture.getWidth(), picture.getHeight());
-        health = 100;
+        health = 50;
     }
     
     public boolean isAlive() {
